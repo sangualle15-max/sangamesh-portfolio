@@ -1,242 +1,965 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080a12">
-<!-- Put your photo in the same folder as this HTML and name it: sangamesh-photo.jpg -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sangamesh | BCA Student</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-  --bg:#070912;
-  --bg2:#0c1020;
-  --card:rgba(18,23,42,.62);
-  --card-solid:#11172a;
-  --ink:#f4f7ff;
-  --muted:#9ba6c2;
-  --accent:#7c8cff;
-  --accent2:#31d7ff;
-  --gold:#ffd45c;
-  --line:rgba(255,255,255,.10);
-  --shadow:0 25px 80px rgba(0,0,0,.38);
-  --radius:24px;
+  --bg:#050505;
+  --white:#f5f5f5;
+  --muted:#a2a2a7;
+  --line:rgba(255,255,255,.13);
+  --accent:#b8ff3d;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:30px}
-body{
+
+*{
   margin:0;
-  color:var(--ink);
-  background:
-    radial-gradient(circle at 15% 10%,rgba(124,140,255,.18),transparent 28%),
-    radial-gradient(circle at 85% 20%,rgba(49,215,255,.10),transparent 25%),
-    linear-gradient(135deg,var(--bg),var(--bg2));
-  font-family:Inter,system-ui,sans-serif;
-  line-height:1.65;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#050505;
+  color:var(--white);
+  font-family:Inter,sans-serif;
   overflow-x:hidden;
 }
-body:before{
-  content:"";
-  position:fixed;inset:0;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  z-index:20;
+
+a{
+  color:inherit;
+  text-decoration:none;
 }
-a{color:inherit}
-main{max-width:900px;margin:auto;padding:0 22px 60px}
+
+/* ================= NAVBAR ================= */
+
 nav{
-  position:sticky;top:16px;z-index:10;
-  display:flex;justify-content:space-between;align-items:center;
-  margin:16px 0 0;padding:10px 12px;
-  background:rgba(8,10,18,.62);border:1px solid var(--line);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,.2)
-}
-.logo{font:700 1.05rem "Space Grotesk";letter-spacing:-.03em}
-.logo span{color:var(--accent2)}
-.navlinks{display:flex;gap:6px}
-.navlinks a{padding:8px 12px;color:var(--muted);font-size:.85rem;text-decoration:none;border-radius:10px}
-.navlinks a:hover{color:var(--ink);background:rgba(255,255,255,.07)}
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1100px,92%);
+  z-index:100;
 
-.hero{min-height:78vh;display:flex;align-items:center;padding:90px 0 80px;position:relative}
-.hero-content{position:relative;z-index:1}
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:13px 18px;
+
+  background:rgba(0,0,0,.45);
+  border:1px solid var(--line);
+  border-radius:18px;
+
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+.logo{
+  font-family:"Space Grotesk";
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:-.04em;
+}
+
+.logo span{
+  color:var(--accent);
+}
+
+.navlinks{
+  display:flex;
+  gap:8px;
+}
+
+.navlinks a{
+  color:#aaa;
+  padding:8px 12px;
+  border-radius:10px;
+  font-size:.85rem;
+  transition:.3s;
+}
+
+.navlinks a:hover{
+  color:white;
+  background:rgba(255,255,255,.08);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* FULL SCREEN PHOTO */
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+.hero-bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center right;
+
+  filter:
+    brightness(.62)
+    contrast(1.08)
+    saturate(.9);
+}
+
+/* CINEMATIC OVERLAY */
+
+.hero-bg:after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.98) 0%,
+      rgba(0,0,0,.88) 25%,
+      rgba(0,0,0,.45) 55%,
+      rgba(0,0,0,.12) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(0,0,0,.75) 0%,
+      transparent 35%,
+      rgba(0,0,0,.35) 100%
+    );
+}
+
+/* CINEMATIC GLOW */
+
+.hero-glow{
+  position:absolute;
+  width:500px;
+  height:500px;
+
+  right:8%;
+  top:20%;
+
+  background:var(--accent);
+  opacity:.07;
+
+  filter:blur(120px);
+  border-radius:50%;
+
+  z-index:1;
+}
+
+/* HERO CONTENT */
+
+.hero-content{
+  position:relative;
+  z-index:5;
+
+  width:min(1150px,92%);
+  margin:auto;
+
+  padding-top:80px;
+}
+
+.hero-text{
+  max-width:650px;
+}
+
+/* SMALL LABEL */
+
 .eyebrow{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:8px 12px;border:1px solid var(--line);border-radius:999px;
-  color:#cbd3ea;background:rgba(255,255,255,.035);font-size:.82rem;
-  margin-bottom:24px
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+
+  padding:8px 14px;
+  margin-bottom:25px;
+
+  border:1px solid var(--line);
+  border-radius:50px;
+
+  background:rgba(255,255,255,.05);
+
+  color:#ddd;
+  font-size:.76rem;
+  letter-spacing:.04em;
+
+  backdrop-filter:blur(10px);
 }
-.dot{width:7px;height:7px;border-radius:50%;background:#55e98a;box-shadow:0 0 15px #55e98a}
+
+.dot{
+  width:7px;
+  height:7px;
+
+  background:var(--accent);
+  border-radius:50%;
+
+  box-shadow:0 0 15px var(--accent);
+}
+
+/* MAIN TITLE */
+
 h1{
-  font:700 clamp(3.4rem,11vw,7.6rem)/.88 "Space Grotesk";
-  letter-spacing:-.075em;margin:0 0 28px;max-width:800px
+  font-family:"Space Grotesk";
+
+  font-size:clamp(4rem,9vw,8.5rem);
+
+  line-height:.84;
+  letter-spacing:-.085em;
+
+  margin-bottom:30px;
 }
-.gradient{
-  background:linear-gradient(110deg,#fff 15%,#9caaff 48%,#31d7ff 90%);
-  -webkit-background-clip:text;background-clip:text;color:transparent
+
+.name{
+  color:var(--accent);
 }
-.hero p{max-width:570px;color:var(--muted);font-size:1.08rem}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* DESCRIPTION */
+
+.hero-description{
+  max-width:550px;
+
+  color:#c2c2c7;
+
+  font-size:1.05rem;
+  line-height:1.8;
+}
+
+/* BUTTONS */
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+
+  margin-top:30px;
+}
+
 .btn{
-  display:inline-flex;align-items:center;gap:8px;padding:13px 18px;
-  border-radius:13px;text-decoration:none;font-weight:700;border:1px solid var(--line);
-  transition:.25s transform,.25s background,.25s border
-}
-.btn.primary{background:var(--ink);color:#080a12;border-color:var(--ink)}
-.btn.secondary{background:rgba(255,255,255,.04);color:var(--ink)}
-.btn:hover{transform:translateY(-3px)}
-.btn.secondary:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18)}
-.orb{
-  position:absolute;width:420px;height:420px;border-radius:50%;
-  right:-170px;top:25%;background:linear-gradient(135deg,rgba(124,140,255,.22),rgba(49,215,255,.04));
-  filter:blur(2px);box-shadow:0 0 120px rgba(124,140,255,.12)
-}
-.orb:after{content:"";position:absolute;inset:55px;border:1px solid rgba(124,140,255,.2);border-radius:50%}
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-section{padding:65px 0;border-top:1px solid var(--line)}
-.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}
-.kicker{text-transform:uppercase;letter-spacing:.16em;color:var(--accent2);font-size:.72rem;font-weight:700}
-h2{font:600 clamp(1.8rem,5vw,2.5rem)/1.1 "Space Grotesk";margin:6px 0 0;letter-spacing:-.04em}
-p{margin:0 0 13px;color:var(--muted)}
+  padding:13px 20px;
 
-.about{
-  display:grid;grid-template-columns:1.2fr .8fr;gap:20px
-}
-.glass{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:25px;box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
-}
-.quote{font:500 1.35rem/1.35 "Space Grotesk";color:#e9edfa}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.stat{padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}
-.stat strong{display:block;font:700 1.5rem "Space Grotesk"}
-.stat span{font-size:.78rem;color:var(--muted)}
+  border-radius:12px;
 
-.skills{display:flex;flex-wrap:wrap;gap:10px}
+  font-weight:700;
+
+  border:1px solid var(--line);
+
+  transition:.3s;
+}
+
+.btn.primary{
+  background:white;
+  color:#050505;
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.05);
+  color:white;
+
+  backdrop-filter:blur(10px);
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+/* SCROLL TEXT */
+
+.scroll{
+  position:absolute;
+  bottom:35px;
+  left:4%;
+
+  z-index:5;
+
+  color:#777;
+  font-size:.7rem;
+
+  letter-spacing:.2em;
+  text-transform:uppercase;
+
+  writing-mode:vertical-rl;
+}
+
+/* CINEMATIC LINE */
+
+.cinema-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+
+  width:100%;
+  height:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--accent),
+      transparent
+    );
+
+  opacity:.7;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+  padding:110px 0;
+  border-top:1px solid var(--line);
+  background:#050505;
+}
+
+.container{
+  width:min(1100px,92%);
+  margin:auto;
+}
+
+.section-label{
+  color:var(--accent);
+
+  font-size:.72rem;
+  font-weight:700;
+
+  letter-spacing:.18em;
+  text-transform:uppercase;
+
+  margin-bottom:12px;
+}
+
+h2{
+  font-family:"Space Grotesk";
+
+  font-size:clamp(2.5rem,6vw,5rem);
+
+  line-height:.95;
+  letter-spacing:-.07em;
+
+  margin-bottom:40px;
+}
+
+.green{
+  color:var(--accent);
+}
+
+/* ================= ABOUT ================= */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:20px;
+}
+
+.card{
+  padding:30px;
+
+  background:rgba(255,255,255,.045);
+
+  border:1px solid var(--line);
+  border-radius:24px;
+
+  backdrop-filter:blur(18px);
+}
+
+.about-text{
+  color:#bcbcc2;
+
+  font-size:1.1rem;
+  line-height:1.9;
+}
+
+.about-text strong{
+  color:white;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.stat{
+  padding:20px;
+
+  border:1px solid var(--line);
+  border-radius:18px;
+
+  background:rgba(255,255,255,.025);
+}
+
+.stat-number{
+  color:var(--accent);
+
+  font-family:"Space Grotesk";
+
+  font-size:1.8rem;
+  font-weight:700;
+}
+
+.stat-name{
+  color:#888;
+  font-size:.78rem;
+}
+
+/* ================= SKILLS ================= */
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
 .skill{
-  padding:10px 15px;border:1px solid var(--line);border-radius:999px;
-  background:rgba(255,255,255,.035);font-weight:600;font-size:.9rem
-}
-.skill.learning{border-color:rgba(49,215,255,.3);color:#a9efff}
-.skill.learning:before{content:"↗ ";color:var(--accent2)}
+  padding:13px 18px;
 
-.projects{display:grid;gap:14px}
+  border:1px solid var(--line);
+  border-radius:50px;
+
+  background:rgba(255,255,255,.035);
+
+  color:#ddd;
+
+  transition:.3s;
+}
+
+.skill:hover{
+  color:var(--accent);
+  border-color:var(--accent);
+
+  transform:translateY(-3px);
+}
+
+/* ================= PROJECTS ================= */
+
+.projects{
+  display:grid;
+  gap:15px;
+}
+
 .project{
-  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
-  padding:20px;border:1px solid var(--line);border-radius:20px;
-  background:linear-gradient(110deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
-  transition:.3s transform,.3s border,.3s background
-}
-.project:hover{transform:translateY(-5px);border-color:rgba(124,140,255,.45);background:rgba(124,140,255,.07)}
-.num{
-  width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
-  background:rgba(124,140,255,.12);color:#aeb8ff;font-weight:700
-}
-.project h3{margin:0 0 3px;font:600 1.05rem "Space Grotesk"}
-.project p{margin:0;font-size:.88rem}
-.badge{font-size:.72rem;color:var(--muted);white-space:nowrap}
-.contact{
-  text-align:center;padding:55px 25px;border:1px solid var(--line);
-  border-radius:30px;background:
-  radial-gradient(circle at 50% 0%,rgba(124,140,255,.16),transparent 45%),
-  rgba(255,255,255,.025)
-}
-.contact h2{font-size:clamp(2rem,7vw,3.2rem)}
-.contact p{max-width:500px;margin:14px auto 25px}
-footer{padding:35px 0 0;text-align:center;color:#66708b;font-size:.82rem}
+  display:flex;
+  align-items:center;
+  gap:20px;
 
-.reveal{opacity:0;transform:translateY(25px);animation:reveal .8s ease forwards}
-.delay{animation-delay:.12s}
-.delay2{animation-delay:.24s}
-@keyframes reveal{to{opacity:1;transform:none}}
-.cinematic-line{
-  position:absolute;left:0;right:0;bottom:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
-  opacity:.75;
+  padding:24px;
+
+  border:1px solid var(--line);
+  border-radius:20px;
+
+  background:rgba(255,255,255,.035);
+
+  transition:.3s;
 }
-@media(max-width:680px){
-  main{padding:0 16px 45px}
-  nav{top:10px}.navlinks a{display:none}
-  .hero{min-height:75vh;padding:70px 0}
-  .orb{width:280px;height:280px;right:-180px;top:25%}
-  .about{grid-template-columns:1fr}
-  .project{grid-template-columns:auto 1fr}
-  .badge{grid-column:2}
-  section{padding:48px 0}
+
+.project:hover{
+  transform:translateX(7px);
+
+  border-color:rgba(184,255,61,.4);
 }
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .reveal{animation:none;opacity:1;transform:none}
-  .project,.btn{transition:none}
+
+.project-number{
+  color:var(--accent);
+
+  font-family:"Space Grotesk";
+
+  font-size:1.3rem;
 }
+
+.project h3{
+  font-family:"Space Grotesk";
+  margin-bottom:5px;
+}
+
+.project p{
+  color:#888;
+  font-size:.9rem;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+  text-align:center;
+
+  padding:90px 25px;
+
+  border:1px solid var(--line);
+  border-radius:30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(184,255,61,.1),
+      transparent 45%
+    ),
+    rgba(255,255,255,.025);
+}
+
+.contact p{
+  max-width:520px;
+
+  margin:0 auto 28px;
+
+  color:#999;
+
+  line-height:1.8;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:35px 0;
+
+  text-align:center;
+
+  color:#666;
+
+  font-size:.8rem;
+
+  background:#050505;
+}
+
+/* ================= ANIMATION ================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+
+  animation:reveal .9s ease forwards;
+}
+
+.delay1{
+  animation-delay:.15s;
+}
+
+.delay2{
+  animation-delay:.3s;
+}
+
+@keyframes reveal{
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  nav{
+    width:94%;
+  }
+
+  .navlinks{
+    display:none;
+  }
+
+  .hero{
+    min-height:100vh;
+  }
+
+  .hero-bg img{
+    object-position:65% center;
+  }
+
+  .hero-bg:after{
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.94),
+        rgba(0,0,0,.55)
+      ),
+      linear-gradient(
+        0deg,
+        rgba(0,0,0,.8),
+        transparent 60%
+      );
+  }
+
+  .hero-content{
+    width:90%;
+    padding-top:100px;
+  }
+
+  h1{
+    font-size:clamp(3.8rem,16vw,6rem);
+  }
+
+  .hero-description{
+    max-width:420px;
+    font-size:.95rem;
+  }
+
+  .scroll{
+    display:none;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:80px 0;
+  }
+
+}
+
+/* SMALL PHONES */
+
+@media(max-width:500px){
+
+  .hero-bg img{
+    object-position:68% center;
+  }
+
+  .hero-content{
+    width:90%;
+  }
+
+  h1{
+    font-size:4rem;
+  }
+
+  .hero-description{
+    font-size:.9rem;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .card{
+    padding:22px;
+  }
+
+  .project{
+    padding:20px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
-<main>
+
+<!-- ================= NAVBAR ================= -->
+
 <nav>
-  <div class="logo">SANGU<span>.</span></div>
+
+  <div class="logo">
+    SANGU<span>.</span>
+  </div>
+
   <div class="navlinks">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </div>
+
 </nav>
 
+
+<!-- ================= HERO ================= -->
+
 <header class="hero">
-  <div class="hero-content">
-    <div class="eyebrow reveal"><span class="dot"></span> BCA Student · Building & Learning</div>
-    <h1 class="reveal delay">Hi, I'm <span class="gradient">Sangamesh.</span></h1>
-    <p class="reveal delay2">First-year BCA student exploring code.</p>
-    <div class="hero-actions reveal delay2">
-      <a class="btn primary" href="#projects">View my work ↓</a>
-      <a class="btn secondary" href="https://instagram.com/sangu49___" target="_blank" rel="noopener">Instagram ↗</a>
-    </div>
+
+  <!-- YOUR PHOTO -->
+
+  <div class="hero-bg">
+    <img
+      src="Sangamesh-photo.jpg"
+      alt="Sangamesh">
   </div>
-<div class="cinematic-line"></div>
+
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-text">
+
+      <div class="eyebrow reveal">
+        <span class="dot"></span>
+        BCA STUDENT · CREATOR
+      </div>
+
+      <h1 class="reveal delay1">
+        Hi, I'm<br>
+        <span class="name">Sangamesh.</span>
+      </h1>
+
+      <p class="hero-description reveal delay2">
+        First-year BCA student exploring technology,
+        coding, web development, gaming and content creation.
+      </p>
+
+      <div class="hero-buttons reveal delay2">
+
+        <a href="#about" class="btn primary">
+          Explore Me ↓
+        </a>
+
+        <a
+          href="https://instagram.com/sangu49___"
+          target="_blank"
+          rel="noopener"
+          class="btn secondary">
+          Instagram ↗
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="scroll">
+    Scroll to explore
+  </div>
+
+  <div class="cinema-line"></div>
+
 </header>
 
+
+<!-- ================= ABOUT ================= -->
+
 <section id="about">
-  <div class="section-head">
-    <div>
-      <div class="kicker">01 — About Me</div>
-      <h2>Building skills for the digital world.</h2>
+
+  <div class="container">
+
+    <div class="section-label">
+      01 — About Me
     </div>
+
+    <h2>
+      Learning.<br>
+      Creating.<br>
+      <span class="green">Building.</span>
+    </h2>
+
+    <div class="about-grid">
+
+      <div class="card">
+
+        <p class="about-text">
+          I'm <strong>Sangamesh</strong>, a first-year BCA student
+          interested in technology, coding, gaming and content creation.
+          I'm currently learning programming and web development while
+          building practical projects and improving my skills.
+        </p>
+
+      </div>
+
+      <div class="card stats">
+
+        <div class="stat">
+          <div class="stat-number">01</div>
+          <div class="stat-name">BCA Year</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number">C++</div>
+          <div class="stat-name">Learning</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number">WEB</div>
+          <div class="stat-name">Development</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number">FF</div>
+          <div class="stat-name">Gaming</div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <div class="about">
-    <div class="glass">
-      <p>I'm <strong>Sangamesh</strong>,Hi, I’m Sangu. I’m a first-year BCA student interested in technology, coding, gaming, and content creation.
-        I’m currently learning programming and web development. .</p>
-    </div>
-    <div class="glass">
+
 </section>
+
+
+<!-- ================= SKILLS ================= -->
+
+<section id="skills">
+
+  <div class="container">
+
+    <div class="section-label">
+      02 — Skills
+    </div>
+
+    <h2>
+      What I'm<br>
+      <span class="green">learning.</span>
+    </h2>
+
+    <div class="skills">
+
+      <div class="skill">C Programming</div>
+      <div class="skill">C++</div>
+      <div class="skill">Python</div>
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">Web Development</div>
+      <div class="skill">Video Editing</div>
+      <div class="skill">Content Creation</div>
+      <div class="skill">Gaming</div>
+      <div class="skill">Free Fire</div>
+      <div class="skill">Communication</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
 
 <section id="projects">
-  <div class="section-head">
-    <div><div class="kicker">03 — Projects</div><h2>Learning by making.</h2></div>
+
+  <div class="container">
+
+    <div class="section-label">
+      03 — Projects
+    </div>
+
+    <h2>
+      Things I've<br>
+      <span class="green">built.</span>
+    </h2>
+
+    <div class="projects">
+
+      <article class="project">
+
+        <div class="project-number">
+          01
+        </div>
+
+        <div>
+          <h3>Personal Portfolio</h3>
+
+          <p>
+            Cinematic personal website built using HTML and CSS.
+          </p>
+        </div>
+
+      </article>
+
+
+      <article class="project">
+
+        <div class="project-number">
+          02
+        </div>
+
+        <div>
+          <h3>Tech Content</h3>
+
+          <p>
+            Short-form technology and information content.
+          </p>
+        </div>
+
+      </article>
+
+
+      <article class="project">
+
+        <div class="project-number">
+          03
+        </div>
+
+        <div>
+          <h3>Programming Projects</h3>
+
+          <p>
+            Small projects created while learning programming.
+          </p>
+        </div>
+
+      </article>
+
+    </div>
+
   </div>
-  <div class="projects">
-    <article class="project">
-      <div class="num">01</div>
-      <div><h3>This Portfolio</h3><p>Personal website built with HTML and CSS.</p></div>
-      <span class="badge">DONE ✓</span>
-    </article>
-  </div>
+
 </section>
+
+
+<!-- ================= CONTACT ================= -->
 
 <section id="contact">
-  <div class="contact">
-    <div class="kicker">04 — Connect</div>
-    <h2>Let's build something.</h2>
-    <p>Want to say hi or share tips for a beginner? Find me on Instagram.</p>
-    <a class="btn primary" href="https://instagram.com/sangu49___" target="_blank" rel="noopener">Message @sangu49___ ↗</a>
+
+  <div class="container">
+
+    <div class="contact">
+
+      <div class="section-label">
+        04 — Connect
+      </div>
+
+      <h2>
+        Let's connect.
+      </h2>
+
+      <p>
+        I'm learning, creating and building my skills every day.
+        Follow my journey on Instagram.
+      </p>
+
+      <a
+        href="https://instagram.com/sangu49___"
+        target="_blank"
+        rel="noopener"
+        class="btn primary">
+        Instagram ↗
+      </a>
+
+    </div>
+
   </div>
+
 </section>
 
-<footer>© 2026 Sangamesh · Made with HTML & CSS</footer>
-</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+  © 2026 Sangamesh · Built with HTML & CSS
+</footer>
+
 </body>
 </html>
+```
